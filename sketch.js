@@ -7,7 +7,7 @@ var bullets;
 var timer;
 var timeToNextShot;
 
-//TODO: loosing phrases array 
+//TODO: loosing phrases array
 //TODO: adjust multiplier for speeding up bullets
 //TODO: add spawn point
 //TODO: adjust colour generator so colours arent dark
@@ -66,8 +66,9 @@ function draw() {
       shoot();
   }
   for(var i = 0; i < bullets.length; i++){
-    if(bullets[i].position.x > width || bullets[i].position.x < 0){
-      bullets[i].remove();
+    if(bullets[i].position.x > width || bullets[i].position.x < 0
+        || bullets[i].position.y > height || bullets[i].position.y < 0){
+      //bullets[i].remove();
       bullets.remove(bullets[i]);
     }
   }
