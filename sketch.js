@@ -7,14 +7,14 @@ var bullets;
 var timer;
 var timeToNextShot;
 
-//TODO: leaderboard
-//TODO: loosing phrases array (MOTHERFUCKER?)
+//TODO: loosing phrases array 
 //TODO: adjust multiplier for speeding up bullets
 //TODO: add spawn point
 //TODO: adjust colour generator so colours arent dark
 //TODO: cookie for high score
 
 //experimental
+//TODO: leaderboard
 //TODO: game over w/ lives
 //TODO: arrow key controls
 //TODO: sounds?
