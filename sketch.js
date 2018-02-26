@@ -26,25 +26,25 @@ var timeToNextShot;
       //changes,
 
 function setup() {
+  //instanciate varibles for the scores
   points = 0;
   highScore = 0;
+  //create the canvas
   createCanvas(windowWidth, windowHeight / 2);
-  //background(getRandomColor(), getRandomColor(), getRandomColor());
+
+  //create player character sprite
   spr = createSprite(
     width/2, height/2, 40, 40);
   spr.shapeColor = color(125);
 
+  //create the target sprite
   target = createSprite(
     random(100, width-100),
     random(100, height-100), 20, 20);
   target.shapeColor = color(getRandomColor());
 
-  // gun = createSprite(
-  //   windowWidth - 60, (windowHeight / 2) - 60, 20, 50);
-  // gun.rotateToDirection = true;
-  // gun.maxSpeed = 0.99;
-  // gun.shapeColor = color(125);
-
+  //create the bullets group and initialize the timer and time to
+  //next shot for the bullets
   bullets = new Group();
   timeToNextShot = 2000;
   timer = millis();
