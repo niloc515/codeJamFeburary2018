@@ -7,6 +7,24 @@ var bullets;
 var timer;
 var timeToNextShot;
 
+//TODO: leaderboard
+//TODO: loosing phrases array (MOTHERFUCKER?)
+//TODO: adjust multiplier for speeding up bullets
+//TODO: add spawn point
+//TODO: adjust colour generator so colours arent dark
+//TODO: cookie for high score
+
+//experimental
+//TODO: game over w/ lives
+//TODO: arrow key controls
+//TODO: sounds?
+//TODO: timer till next points
+//TODO: level system,
+      //different spawn points,
+      //less  time,
+      //background colour
+      //changes,
+
 function setup() {
   points = 0;
   highScore = 0;
