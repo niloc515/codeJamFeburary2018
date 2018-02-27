@@ -10,7 +10,6 @@ var timer;            //current time in milli seconds
 var timeToNextShot;   //time till the next bullet is created
 var overlapFlag;      //flag for wether the player is overlapping with a bullets
 
-//TODO: loosing phrases array
 //TODO: adjust multiplier for speeding up bullets
 //TODO: add spawn point
 //TODO: adjust colour generator so colours arent dark
