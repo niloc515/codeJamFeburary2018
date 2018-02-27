@@ -1,14 +1,14 @@
-var spr;
-var target;
-var points;
-var highScore;
-var gun;
-var bullets;
-var loosingPhrases;
-var message;
-var timer;
-var timeToNextShot;
-var overlapFlag;
+var spr;              //the player sprite
+var target;           //the target the player is chasing
+var points;           //the number of points the player has
+var highScore;        //the players high score
+var gun;              //the spawn point for the bullets
+var bullets;          //the group of sprites for the player to avoid
+var loosingPhrases;   //the array of string messages that could appear upon loosing
+var message;          //the message currently appearing upon loosing
+var timer;            //current time in milli seconds
+var timeToNextShot;   //time till the next bullet is created
+var overlapFlag;      //flag for wether the player is overlapping with a bullets
 
 //TODO: loosing phrases array
 //TODO: adjust multiplier for speeding up bullets
