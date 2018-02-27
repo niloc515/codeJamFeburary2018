@@ -4,13 +4,17 @@ var points;
 var highScore;
 var gun;
 var bullets;
+var loosingPhrases;
+var message;
 var timer;
 var timeToNextShot;
+var overlapFlag;
 
 //TODO: loosing phrases array
 //TODO: adjust multiplier for speeding up bullets
 //TODO: add spawn point
 //TODO: adjust colour generator so colours arent dark
+//TODO: pause butotn (p key)
 
 //experimental
 //TODO: leaderboard
@@ -24,10 +28,14 @@ var timeToNextShot;
       //background colour
       //changes,
 
-function setup() {
+function setup() {//start setup
   //instanciate varibles for the scores
   points = 0;
   checkCookie();    //sets the highScore according to the cookie
+
+  loosingPhrases = ["Whoops", "Uh oh", "Oops", ":(", "Darn"];
+  overlapFlag = false; //true if mouse overlaps with bullets
+
   //create the canvas
   createCanvas(windowWidth, windowHeight / 2);
 
@@ -47,19 +55,28 @@ function setup() {
   bullets = new Group();
   timeToNextShot = 2000;
   timer = millis();
-}
+}//end setup
 
-function draw() {
+function draw() {//start draw
 
   background(25);
   spr.position.x = mouseX;
   spr.position.y = mouseY;
 
-  //spr.overlap(target, resetTarget());
+  //what happens whe the mouse overlaps the other sprites
   target.overlap(spr, resetTarget);
-  bullets.overlap(spr, whoops);
+  if(bullets.overlap(spr) && !overlapFlag){
+    overlapFlag = true;
+    message = random(loosingPhrases);
+    whoops();
+  }
+  else if(bullets.overlap(spr) && overlapFlag){
+    whoops();
+  }
+  else if(!bullets.overlap(spr)){
+    overlapFlag = false;
+  }
 
-  //gun.addSpeed(0, atan2(mouseX , mouseY));
 
   if(millis() - timer >= timeToNextShot - (points * 10)){
       shoot();
@@ -87,12 +104,12 @@ function draw() {
   fill(255);
   text("High Score: " + highScore, 50, 100);
 
-}
+}//end draw
 
 function whoops(){
   textSize(72);
   fill(255);
-  text("whoops!", width/2, height/2);
+  text(message, width/2, height/2);
   points = 0;
 }
 
