@@ -14,6 +14,10 @@ var overlapFlag;      //flag for wether the player is overlapping with a bullets
 //TODO: add spawn point
 //TODO: adjust colour generator so colours arent dark
 //TODO: pause butotn (p key)
+//TODO: positive messages for doing well
+
+//bugs to fix
+//TODO: fix bullet death bug so they die when they leave canvas
 
 //experimental
 //TODO: leaderboard
@@ -32,7 +36,8 @@ function setup() {//start setup
   points = 0;
   checkCookie();    //sets the highScore according to the cookie
 
-  loosingPhrases = ["Whoops", "Uh oh", "Oops", ":(", "Darn"];
+  loosingPhrases = ["Whoops", "Uh oh", "Oops", ":(", "Darn",
+                    "A for effort", "An attempt was made"];
   overlapFlag = false; //true if mouse overlaps with bullets
 
   //create the canvas
@@ -77,13 +82,12 @@ function draw() {//start draw
   }
 
 
-  if(millis() - timer >= timeToNextShot - (points * 10)){
+  if(millis() - timer >= timeToNextShot - (points * 20)){
       shoot();
   }
   for(var i = 0; i < bullets.length; i++){
     if(bullets[i].position.x > width || bullets[i].position.x < 0
         || bullets[i].position.y > height || bullets[i].position.y < 0){
-      //bullets[i].remove();
       bullets.remove(bullets[i]);
     }
   }
@@ -117,7 +121,7 @@ function shoot(){
     (windowHeight / 2) - 60,
     10,
     10,);
-  bullet.attractionPoint(0.8, mouseX, mouseY);
+  bullet.attractionPoint(0.8 + (0.1 * points), mouseX, mouseY);
   bullet.shapeColor = color('#ffbf00');
   bullets.add(bullet);
   //var tempX, tempY;
@@ -191,6 +195,10 @@ function checkCookie(){
   }
 }
 
+/**
+ * Returns a random hex colour
+ * @return a hex colour (eg. #AA0099)
+ */
 function getRandomColor() {
     var letters = '0123456789ABCDEF';
     var color = '#';
