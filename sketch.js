@@ -11,7 +11,6 @@ var timeToNextShot;
 //TODO: adjust multiplier for speeding up bullets
 //TODO: add spawn point
 //TODO: adjust colour generator so colours arent dark
-//TODO: cookie for high score
 
 //experimental
 //TODO: leaderboard
@@ -28,7 +27,7 @@ var timeToNextShot;
 function setup() {
   //instanciate varibles for the scores
   points = 0;
-  highScore = 0;
+  checkCookie();    //sets the highScore according to the cookie
   //create the canvas
   createCanvas(windowWidth, windowHeight / 2);
 
@@ -81,6 +80,7 @@ function draw() {
 
   if(points > highScore){
     highScore = points;
+    setCookie("hS", highScore);
   }
 
   textSize(36);
@@ -127,6 +127,52 @@ function resetSprite(s, size){
     random(100, height-100),
     size,
     size);
+}
+
+/**
+ * Function to add a value to the cookie
+ * @param cName the name of the cookie
+ * @param cValue the value of the cookie
+*/
+function setCookie(cName, cValue) {
+    var exDate = new Date();    //the expirery date of the cookie
+    exDate.setTime(exDate.getTime() + (30 *86400000));
+    var expires = "expires="+ exDate.toUTCString();
+    document.cookie = cName + "=" + cValue + ";" + expires + ";path=/";
+}
+
+/**
+ * Function to set the value of the cookie
+ * @param cName the name of the cookie
+ * @param cValue the value of the cookie
+*/
+function getCookie(cName) {
+    var name = cName + "=";
+    var decodedCookie = decodeURIComponent(document.cookie);
+    var ca = decodedCookie.split(';');
+    for(var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return "";
+}
+
+/**
+ * Checks the value of the cookie and sets the high score accordinly
+*/
+function checkCookie(){
+  var hS=getCookie("hS");
+  if(hS != ""){
+    highScore = hS;
+  }
+  else{
+    highScore = 0;
+  }
 }
 
 function getRandomColor() {
