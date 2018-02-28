@@ -13,11 +13,10 @@ var timeToMoveTarget; //time till the target gets moved
 var timeToNextShot;   //time till the next bullet is created
 var overlapFlag;      //flag for wether the player is overlapping with a bullets
 
-//TODO: adjust multiplier for speeding up bullets
 //TODO: add spawn point
 //TODO: adjust colour generator so colours arent dark
-//TODO: pause butotn (p key)
-//TODO: positive messages for doing well
+//TODO: pause button (p key)
+//TODO: positive messages for doing well (in progress)
 
 //bugs to fix
 //TODO: fix bullet death bug so they die when they leave canvas
@@ -28,7 +27,6 @@ var overlapFlag;      //flag for wether the player is overlapping with a bullets
 //TODO: game over w/ lives
 //TODO: arrow key controls
 //TODO: sounds?
-//TODO: shotTimer till next points
 //TODO: level system,
       //different spawn points,
       //less  time,
@@ -120,6 +118,9 @@ function draw() {//start draw
 
 }//end draw
 
+/**
+ * Displays a message and resets current points to zero
+ */
 function whoops(){
   textSize(72);
   fill(255);
@@ -127,6 +128,10 @@ function whoops(){
   points = 0;
 }
 
+/**
+ * Creates a new bullet sprite, adds it to the "bullets" group
+ * and resets the shotTimer to the current time in miliseconds
+ */
 function shoot(){
   var bullet = createSprite(windowWidth - 60,
     (windowHeight / 2) - 60,
@@ -139,11 +144,17 @@ function shoot(){
   shotTimer = millis();
 }
 
+/**
+ * Adds to score and moves the target to a new location
+ */
 function resetTarget(){
   points++;
   moveTarget();
 }
 
+/**
+ * Moves the target sprite
+ */
 function moveTarget(){
   target.remove();
   target = createSprite(
@@ -153,16 +164,6 @@ function moveTarget(){
     20,
   );
   targetTimer = millis();
-}
-
-function resetSprite(s, size){
-  points++;
-  s.remove();
-  s = createSprite(
-    random(100, width-100),
-    random(100, height-100),
-    size,
-    size);
 }
 
 /**
