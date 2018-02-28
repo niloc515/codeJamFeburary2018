@@ -6,7 +6,7 @@ var gun;              //the spawn point for the bullets
 var bullets;          //the group of sprites for the player to avoid
 var loosingPhrases;   //the array of string messages that could appear upon loosing
 var message;          //the message currently appearing upon loosing
-var timer;            //current time in milli seconds
+var shotTimer;            //current time in milli seconds
 var timeToNextShot;   //time till the next bullet is created
 var overlapFlag;      //flag for wether the player is overlapping with a bullets
 
@@ -24,7 +24,7 @@ var overlapFlag;      //flag for wether the player is overlapping with a bullets
 //TODO: game over w/ lives
 //TODO: arrow key controls
 //TODO: sounds?
-//TODO: timer till next points
+//TODO: shotTimer till next points
 //TODO: level system,
       //different spawn points,
       //less  time,
@@ -54,11 +54,11 @@ function setup() {//start setup
     random(100, height-100), 20, 20);
   target.shapeColor = color(getRandomColor());
 
-  //create the bullets group and initialize the timer and time to
+  //create the bullets group and initialize the shotTimer and time to
   //next shot for the bullets
   bullets = new Group();
   timeToNextShot = 2000;
-  timer = millis();
+  shotTimer = millis();
 }//end setup
 
 function draw() {//start draw
@@ -82,7 +82,7 @@ function draw() {//start draw
   }
 
 
-  if(millis() - timer >= timeToNextShot - (points * 20)){
+  if(millis() - shotTimer >= timeToNextShot - (points * 20)){
       shoot();
   }
   for(var i = 0; i < bullets.length; i++){
@@ -125,7 +125,7 @@ function shoot(){
   bullet.shapeColor = color('#ffbf00');
   bullets.add(bullet);
   //var tempX, tempY;
-  timer = millis();
+  shotTimer = millis();
 }
 
 function resetTarget(){
