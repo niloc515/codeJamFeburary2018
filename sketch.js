@@ -5,8 +5,11 @@ var highScore;        //the players high score
 var gun;              //the spawn point for the bullets
 var bullets;          //the group of sprites for the player to avoid
 var loosingPhrases;   //the array of string messages that could appear upon loosing
+var encouragement;    //phrases of encouragment when certain amount of points is reached
 var message;          //the message currently appearing upon loosing
-var shotTimer;            //current time in milli seconds
+var shotTimer;        //current time in milli seconds for
+var targetTimer;      //time till target gets moved
+var timeToMoveTarget; //time till the target gets moved
 var timeToNextShot;   //time till the next bullet is created
 var overlapFlag;      //flag for wether the player is overlapping with a bullets
 
@@ -18,6 +21,7 @@ var overlapFlag;      //flag for wether the player is overlapping with a bullets
 
 //bugs to fix
 //TODO: fix bullet death bug so they die when they leave canvas
+//TODO: collide with edges of canvas
 
 //experimental
 //TODO: leaderboard
@@ -37,7 +41,8 @@ function setup() {//start setup
   checkCookie();    //sets the highScore according to the cookie
 
   loosingPhrases = ["Whoops", "Uh oh", "Oops", ":(", "Darn",
-                    "A for effort", "An attempt was made"];
+                    "A for effort", "An attempt was made", "#@&$!"];
+  encouragment = ["Good job", "Keep going!", "Yay!", ":)"];
   overlapFlag = false; //true if mouse overlaps with bullets
 
   //create the canvas
@@ -59,6 +64,8 @@ function setup() {//start setup
   bullets = new Group();
   timeToNextShot = 2000;
   shotTimer = millis();
+  targetTimer = millis();
+  timeToMoveTarget = 2500;
 }//end setup
 
 function draw() {//start draw
@@ -90,6 +97,10 @@ function draw() {//start draw
         || bullets[i].position.y > height || bullets[i].position.y < 0){
       bullets.remove(bullets[i]);
     }
+  }
+  //moves the taget if player is taking too long
+  if(millis() - targetTimer >= timeToMoveTarget){
+    moveTarget();
   }
 
   drawSprites();
@@ -130,6 +141,10 @@ function shoot(){
 
 function resetTarget(){
   points++;
+  moveTarget();
+}
+
+function moveTarget(){
   target.remove();
   target = createSprite(
     random(100, width-100),
@@ -137,6 +152,7 @@ function resetTarget(){
     20,
     20,
   );
+  targetTimer = millis();
 }
 
 function resetSprite(s, size){
