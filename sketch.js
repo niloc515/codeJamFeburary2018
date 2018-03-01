@@ -23,6 +23,10 @@ var overlapFlag;      //flag for wether the player is overlapping with a bullets
 //TODO: fix bullet death bug so they die when they leave canvas
 //TODO: collide with edges of canvas
 
+//Easter eggs
+//TODO: Seb egg
+//TODO: angry egg
+
 //experimental
 //TODO: leaderboard
 //TODO: game over w/ lives
@@ -34,29 +38,29 @@ var overlapFlag;      //flag for wether the player is overlapping with a bullets
       //background colour
       //changes,
 
-/**
- * super class projectile basically non player sprites that move and are to be
- * avoided
- */
-Class Projectile{
-
-}
-
-/**
- * Bullet projectile
- *
- */
-Class Bullet extends Projectile{
-
-}
-
-/**
- * Exploding bullet projectile
- *
- */
-Class ExBullet extends Bullet{
-
-}
+// /**
+//  * super class projectile basically non player sprites that move and are to be
+//  * avoided
+//  */
+// Class Projectile{
+//
+// }
+//
+// /**
+//  * Bullet projectile
+//  *
+//  */
+// Class Bullet extends Projectile{
+//
+// }
+//
+// /**
+//  * Exploding bullet projectile
+//  *
+//  */
+// Class ExBullet extends Bullet{
+//
+// }
 
 function setup() {//start setup
   //instanciate varibles for the scores
