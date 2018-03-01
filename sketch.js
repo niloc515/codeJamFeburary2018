@@ -14,6 +14,7 @@ var timeToNextShot;   //time till the next bullet is created
 var overlapFlag;      //flag for wether the player is overlapping with a bullets
 
 //TODO: add spawn point
+//TODO: adjust time till move and shot multipliers
 //TODO: adjust colour generator so colours arent dark
 //TODO: pause button (p key)
 //TODO: positive messages for doing well (in progress)
@@ -32,6 +33,30 @@ var overlapFlag;      //flag for wether the player is overlapping with a bullets
       //less  time,
       //background colour
       //changes,
+
+/**
+ * super class projectile basically non player sprites that move and are to be
+ * avoided
+ */
+Class Projectile{
+
+}
+
+/**
+ * Bullet projectile
+ *
+ */
+Class Bullet extends Projectile{
+
+}
+
+/**
+ * Exploding bullet projectile
+ *
+ */
+Class ExBullet extends Bullet{
+
+}
 
 function setup() {//start setup
   //instanciate varibles for the scores
@@ -150,6 +175,19 @@ function newBullet(positionX, positionY){
   bullet.attractionPoint(0.8 + (0.1 * points), spr.position.x, spr.position.y);
   bullet.shapeColor = color('#ffbf00');
   bullets.add(bullet);
+}
+
+/**
+ * Creates a new exploding bullet sprite
+ *
+*/
+function newExplodingBullet(positionX, positionY){
+  var exBulllet = createSprite(positionX,
+    positionY,
+    10,
+    10);
+  exBulllet.attractionPoint(0.8 + (0.1 * points), spr.position.x, spr.position.y);
+  exBulllet.shapeColor = color('#1492FF');
 }
 
 /**
