@@ -133,15 +133,40 @@ function whoops(){
  * and resets the shotTimer to the current time in miliseconds
  */
 function shoot(){
-  var bullet = createSprite(windowWidth - 60,
-    (windowHeight / 2) - 60,
+  newBullet(windowWidth - 60, (windowHeight / 2) - 60);
+  shotTimer = millis();
+}
+
+/**
+ * creates a new bullet in a particular spot shoots at player
+ * @param positionX the x position of where the bullet will appear
+ * @param positionY the y position of where the bullet will appear
+ */
+function newBullet(positionX, positionY){
+  var bullet = createSprite(positionX,
+    positionY,
     10,
     10,);
-  bullet.attractionPoint(0.8 + (0.1 * points), mouseX, mouseY);
+  bullet.attractionPoint(0.8 + (0.1 * points), spr.position.x, spr.position.y);
   bullet.shapeColor = color('#ffbf00');
   bullets.add(bullet);
-  //var tempX, tempY;
-  shotTimer = millis();
+}
+
+/**
+ * creates a new bullet in a particular spot shoots in random direction
+ * @param positionX the x position of where the bullet will appear
+ * @param positionY the y position of where the bullet will appear
+ */
+function newRandomBullet(positionX, positionY){
+  var bullet = createSprite(positionX,
+    positionY,
+    10,
+    10,);
+  bullet.attractionPoint(0.8 + (0.1 * points),
+    random(100, width-100),
+    random(100, height-100),);
+  bullet.shapeColor = color('#ffbf00');
+  bullets.add(bullet);
 }
 
 /**
